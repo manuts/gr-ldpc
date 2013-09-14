@@ -8,6 +8,9 @@
 %include "ldpc_swig_doc.i"
 
 %{
+#include "ldpc/copy_bb.h"
 %}
 
 
+%include "ldpc/copy_bb.h"
+GR_SWIG_BLOCK_MAGIC2(ldpc, copy_bb);
