@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    copy_bb.h DESTINATION include/ldpc
+    copy_bb.h
+    ldpc_encoder_bb.h DESTINATION include/ldpc
 )

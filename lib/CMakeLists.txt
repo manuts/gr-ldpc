@@ -26,7 +26,13 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND ldpc_sources
+    gf2mat.cc
+    gf2vec.cc
+    cldpc.cc
+    alist.cc
+    xbp.cc
     copy_bb_impl.cc
+    ldpc_encoder_bb_impl.cc
 )
 
 add_library(gnuradio-ldpc SHARED ${ldpc_sources})
