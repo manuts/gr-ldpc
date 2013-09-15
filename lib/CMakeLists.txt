@@ -33,6 +33,8 @@ list(APPEND ldpc_sources
     xbp.cc
     copy_bb_impl.cc
     ldpc_encoder_bb_impl.cc
+    ldpc_decoder_bb_impl.cc
+    bsc_bb_impl.cc
 )
 
 add_library(gnuradio-ldpc SHARED ${ldpc_sources})
