@@ -12,6 +12,8 @@ class my_tb(gr.top_block):
         print "encoder initialized"
         self.K = self.encoder.get_K()
         self.N = self.encoder.get_N()
+        print self.K
+        print self.N
         str2Kvec = blocks.stream_to_vector(1, self.K)
         chk2symb = digital.chunks_to_symbols_bf(([1, -1]), 1)
         str2Nvec = blocks.stream_to_vector(4, self.N)
@@ -25,9 +27,6 @@ class my_tb(gr.top_block):
         self.dst = blocks.vector_sink_b()
         self.connect(self.src, str2Kvec, self.encoder, self.channel,
                 self.decoder, Kvec2str, self.dst)
-#                self.encoder,
-#                self.channel, self.decoder)
-#                Kvec2str, self.dst)
 
 def main():
     fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/my_peg2"
@@ -42,8 +41,9 @@ def main():
     datatpl = array.array('B')
     for i in range(K):
         datatpl.append(0)
-    f = open('outputx', 'w')
-    for i in range(100):
+    f = open('output', 'w')
+    g = open('data', 'w')
+    for i in range(4):
         txdata = ()
         for i in range(K):
             X = random.randint(0, 1)
@@ -53,10 +53,15 @@ def main():
             else:
                 datatpl[i] = 0
                 txdata = txdata + (0, )
+        g.write("tx data\n")
+        g.write(str(datatpl) + "\n")
         tb.src.set_data(datatpl)
         tb.run()
         rx_tpl = tb.dst.data()
         tb.dst.reset()
+        g.write("rx data\n")
+        g.write(str(rx_tpl) + "\n")
+        print tb.channel.get_err_vec()
         if np.array_equal(txdata, rx_tpl):
             match += 1
         else:

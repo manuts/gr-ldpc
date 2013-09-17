@@ -34,11 +34,13 @@ namespace gr {
       int d_vlen;
       float limit;
       int X;
+      char * err_vec;
 
      public:
       bsc_bb_impl(int vlen, float epsilon);
       ~bsc_bb_impl();
       int get_nerr();
+      char * get_err_vec();
 
       // Where all the action really happens
       int work(int noutput_items,

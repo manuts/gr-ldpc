@@ -38,6 +38,7 @@ namespace gr {
      public:
       typedef boost::shared_ptr<bsc_bb> sptr;
       virtual int get_nerr() = 0;
+      virtual char * get_err_vec() = 0;
 
       /*!
        * \brief Return a shared_ptr to a new instance of ldpc::bsc_bb.
