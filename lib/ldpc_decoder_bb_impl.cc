@@ -50,6 +50,8 @@ namespace gr {
         N = d_code.get_N();
         d_spa.set_K(K);
         d_spa.set_max_iterations(max_iterations);
+        set_input_signature(gr::io_signature::make(1, 1, sizeof(char) * N));
+        set_output_signature(gr::io_signature::make(1, 1, sizeof(char) * K));
     }
 
     /*
