@@ -85,10 +85,10 @@ namespace gr {
         code = d_code.encode(data);
         for ( int i = 0; i < N; i++ ) {
             if ( code[i] == char(0) ) {
-                out[i] = 1.0
+                out[i] = 1.0;
             }
             else {
-                out[i] = -1.0
+                out[i] = -1.0;
             }
         }
 

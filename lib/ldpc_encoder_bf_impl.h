@@ -22,6 +22,8 @@
 #define INCLUDED_LDPC_LDPC_ENCODER_BF_IMPL_H
 
 #include <ldpc/ldpc_encoder_bf.h>
+#include "cldpc.h"
+#include "alist.h"
 
 namespace gr {
   namespace ldpc {
