@@ -61,7 +61,9 @@ def main():
         tb.dst.reset()
         g.write("rx data\n")
         g.write(str(rx_tpl) + "\n")
-        print tb.channel.get_err_vec()
+        a = tb.channel.get_err_vec()
+        for i in range(N):
+            print a[i],
         if np.array_equal(txdata, rx_tpl):
             match += 1
         else:
