@@ -7,7 +7,6 @@
 #include "gf2vec.h"
 #include "gf2mat.h"
 #include "alist.h"
-#include "xbp.h"
 
 class cldpc
 {
@@ -17,7 +16,6 @@ class cldpc
     cldpc(const alist & _list);
     void print_permute();
     std::vector<char> encode(std::vector<char> dataword);
-    std::vector<char> decode(std::vector<float> rx);
     int dimension();
     GF2Mat get_H();
     GF2Mat get_G();
