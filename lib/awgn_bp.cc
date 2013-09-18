@@ -232,12 +232,12 @@ int awgn_bp::get_max_iterations() {
     return max_iterations;
 }
 
-std::vector<char> awgn_bp::decode(std::vector<char> rx_word,
+std::vector<char> awgn_bp::decode(std::vector<float> rx_word,
         int & niteration) {
     niteration = 0;
     compute_init_estimate(rx_word);
-    if (is_codeword(rx_word)) {
-        return rx_word;
+    if (is_codeword()) {
+        return estimate;
     }
     else {
 //        std::cout << "branched at not a codeword\n";
