@@ -25,5 +25,6 @@ install(FILES
     copy_bb.h
     ldpc_encoder_bb.h
     ldpc_decoder_bb.h
-    bsc_bb.h DESTINATION include/ldpc
+    bsc_bb.h
+    ldpc_encoder_bf.h DESTINATION include/ldpc
 )

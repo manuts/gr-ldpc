@@ -12,6 +12,7 @@
 #include "ldpc/ldpc_encoder_bb.h"
 #include "ldpc/ldpc_decoder_bb.h"
 #include "ldpc/bsc_bb.h"
+#include "ldpc/ldpc_encoder_bf.h"
 %}
 
 
@@ -23,3 +24,5 @@ GR_SWIG_BLOCK_MAGIC2(ldpc, ldpc_encoder_bb);
 GR_SWIG_BLOCK_MAGIC2(ldpc, ldpc_decoder_bb);
 %include "ldpc/bsc_bb.h"
 GR_SWIG_BLOCK_MAGIC2(ldpc, bsc_bb);
+%include "ldpc/ldpc_encoder_bf.h"
+GR_SWIG_BLOCK_MAGIC2(ldpc, ldpc_encoder_bf);

@@ -21,5 +21,6 @@ install(FILES
     ldpc_copy_bb.xml
     ldpc_ldpc_encoder_bb.xml
     ldpc_ldpc_decoder_bb.xml
-    ldpc_bsc_bb.xml DESTINATION share/gnuradio/grc/blocks
+    ldpc_bsc_bb.xml
+    ldpc_ldpc_encoder_bf.xml DESTINATION share/gnuradio/grc/blocks
 )
