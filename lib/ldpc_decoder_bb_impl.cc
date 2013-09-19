@@ -91,7 +91,7 @@ namespace gr {
         for ( int i = 0; i < N; i++ ) {
             rx[i] = in[i];
         }
-        estimate = d_spa.decode(rx, n_iterations);
+        estimate = d_spa.decode(rx, &n_iterations);
         data = d_code.get_systematic_bits(estimate);
         for ( int i = 0; i < K; i++ ) {
             out[i] = data[i];
