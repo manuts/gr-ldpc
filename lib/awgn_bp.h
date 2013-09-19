@@ -11,9 +11,9 @@ class awgn_bp
 {
   public:
     awgn_bp () {};
-    awgn_bp (const GF2Mat & X, float sgma);
-    awgn_bp (alist & _list, float sgma);
-    void set_alist_sigma(alist & _list, float sgma);
+    awgn_bp (const GF2Mat  X, float sgma);
+    awgn_bp (alist  _list, float sgma);
+    void set_alist_sigma(alist  _list, float sgma);
     std::vector< std::vector<double> > get_Q();
     std::vector< std::vector<double> > get_R();
     GF2Mat get_H();
@@ -35,7 +35,7 @@ class awgn_bp
     void set_max_iterations(int k);
     int get_max_iterations();
     std::vector<char> decode (std::vector<float> rx_word,
-            int & niterations);
+            int *niterations);
 
   private:
     int M, N, K, max_iterations;

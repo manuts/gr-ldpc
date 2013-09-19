@@ -1,6 +1,6 @@
 #include "alist.h"
 
-alist::alist(const std::string &fname)
+alist::alist(const char * fname)
     : data_ok(false) {
     read(fname);
 }
@@ -36,12 +36,12 @@ std::vector<int> alist::get_num_nlist() {
     return num_nlist;
 }
 
-void alist::read(const std::string &fname) {
+void alist::read(const char * fname) {
     std::ifstream file;
     std::string line;
     std::stringstream ss;
     
-    file.open(fname.c_str());
+    file.open(fname);
     if(!(file.is_open())) {
         std::cout << "Could not open the file" << std::endl;
     }
@@ -110,14 +110,14 @@ void alist::read(const std::string &fname) {
     data_ok = true;
 }
 
-void alist::write(const std::string &fname) const
+void alist::write(const char * fname) const
 {
     if (!data_ok) {
         std::cout << "Data not ok, exiting" << std::endl;
         exit(1);
     }
     // Else
-    std::ofstream file(fname.c_str(), std::ofstream::out);
+    std::ofstream file(fname, std::ofstream::out);
     // Write N and M
     file << N << " " << M << std::endl;
     file << max_num_nlist << " " << max_num_mlist << std::endl;

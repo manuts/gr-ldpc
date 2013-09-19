@@ -1,6 +1,6 @@
 #include "awgn_bp.h"
 
-awgn_bp::awgn_bp ( const GF2Mat & X, float sgma) {
+awgn_bp::awgn_bp ( const GF2Mat X, float sgma) {
     H = X;
     M = H.get_M();
     N = H.get_N();
@@ -15,7 +15,7 @@ awgn_bp::awgn_bp ( const GF2Mat & X, float sgma) {
     estimate.resize(N);
 }
 
-awgn_bp::awgn_bp ( alist & _list, float sgma) {
+awgn_bp::awgn_bp ( alist _list, float sgma) {
     H = GF2Mat(_list);
     mlist = _list.get_mlist();
     nlist = _list.get_nlist();
@@ -34,7 +34,7 @@ awgn_bp::awgn_bp ( alist & _list, float sgma) {
     estimate.resize(N);
 }
 
-void awgn_bp::set_alist_sigma(alist & _list, float sgma) {
+void awgn_bp::set_alist_sigma(alist _list, float sgma) {
     H = GF2Mat(_list);
     mlist = _list.get_mlist();
     nlist = _list.get_nlist();
@@ -233,8 +233,8 @@ int awgn_bp::get_max_iterations() {
 }
 
 std::vector<char> awgn_bp::decode(std::vector<float> rx_word,
-        int & niteration) {
-    niteration = 0;
+        int *niteration) {
+    *niteration = 0;
     compute_init_estimate(rx_word);
     if (is_codeword()) {
         return estimate;
@@ -243,8 +243,8 @@ std::vector<char> awgn_bp::decode(std::vector<float> rx_word,
 //        std::cout << "branched at not a codeword\n";
         rx_lr_calc(rx_word);
         spa_initialize();
-        while (niteration < max_iterations) {
-            niteration += 1;
+        while (*niteration < max_iterations) {
+            *niteration += 1;
             update_chks();
             update_vars();
             decision();

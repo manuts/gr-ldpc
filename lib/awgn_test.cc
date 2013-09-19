@@ -10,7 +10,7 @@
 
 int main () {
     std::string fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963";
-    alist a(fname);
+    alist a(fname.c_str());
     srand(time(NULL));
     std::ifstream random("randoms");
     float trans_prob = 0.6;
@@ -56,7 +56,7 @@ int main () {
                     nerr++;
             }
         }
-        rx = spa.decode(tx, niterations);
+        rx = spa.decode(tx, &niterations);
         data = code.get_systematic_bits(rx);
         match = true;
         for ( int i = 0; i < K; i++ ) {

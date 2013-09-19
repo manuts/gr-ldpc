@@ -12,8 +12,8 @@ class cldpc
 {
   public:
     cldpc() {};
-    cldpc(const GF2Mat & X);
-    cldpc(const alist & _list);
+    cldpc(const GF2Mat X);
+    cldpc(const alist _list);
     void print_permute();
     std::vector<char> encode(std::vector<char> dataword);
     int dimension();
@@ -23,7 +23,7 @@ class cldpc
     int get_N();
     std::vector<char> syndrome(const std::vector<char> in);
     bool is_codeword(const std::vector<char> in);
-    void set_alist(const alist & _list);
+    void set_alist(const alist _list);
     std::vector<char> get_systematic_bits(std::vector<char> in);
 
   private:

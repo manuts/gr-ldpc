@@ -1,6 +1,6 @@
 #include "xbp.h"
 
-xbp::xbp ( const GF2Mat & X, float sgma) {
+xbp::xbp ( const GF2Mat X, float sgma) {
     H = X;
     M = H.get_M();
     N = H.get_N();
@@ -15,7 +15,7 @@ xbp::xbp ( const GF2Mat & X, float sgma) {
     estimate.resize(N);
 }
 
-xbp::xbp ( alist & _list, float sgma) {
+xbp::xbp ( alist _list, float sgma) {
     H = GF2Mat(_list);
     mlist = _list.get_mlist();
     nlist = _list.get_nlist();
@@ -34,7 +34,7 @@ xbp::xbp ( alist & _list, float sgma) {
     estimate.resize(N);
 }
 
-void xbp::set_alist_sigma(alist & _list, float sgma) {
+void xbp::set_alist_sigma(alist _list, float sgma) {
     H = GF2Mat(_list);
     mlist = _list.get_mlist();
     nlist = _list.get_nlist();
@@ -241,9 +241,9 @@ int xbp::get_max_iterations() {
 }
 
 std::vector<char> xbp::decode(std::vector<char> rx_word,
-        int & niteration) {
+        int *niteration) {
 //    std::cout << "inside decode function, initializing ntieration\n";
-    niteration = 0;
+    *niteration = 0;
 //    std::cout << "inside decode function, initialized ntieration\n";
 //    compute_init_estimate(rx_word);
 //    std::cout << "inside decode function, computed initial estimate\n";
@@ -255,8 +255,8 @@ std::vector<char> xbp::decode(std::vector<char> rx_word,
 //        std::cout << "branched at not a codeword\n";
         rx_lr_calc(rx_word);
         spa_initialize();
-        while (niteration < max_iterations) {
-            niteration += 1;
+        while (*niteration < max_iterations) {
+            *niteration += 1;
             update_chks();
             update_vars();
             decision();

@@ -1,6 +1,6 @@
 #include "cldpc.h"
 
-cldpc::cldpc(const GF2Mat & X) {
+cldpc::cldpc(const GF2Mat  X) {
     H = X;
     M = H.get_M();
     N = H.get_N();
@@ -8,7 +8,7 @@ cldpc::cldpc(const GF2Mat & X) {
     K = N - rank_H;
 }
 
-cldpc::cldpc(const alist & _list) {
+cldpc::cldpc(const alist _list) {
     H = GF2Mat(_list);
     M = H.get_M();
     N = H.get_N();
@@ -16,7 +16,7 @@ cldpc::cldpc(const alist & _list) {
     K = N - rank_H;
 }
 
-void cldpc::set_alist(const alist & _list) {
+void cldpc::set_alist(const alist _list) {
     H = GF2Mat(_list);
     M = H.get_M();
     N = H.get_N();

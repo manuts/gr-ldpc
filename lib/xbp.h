@@ -11,9 +11,9 @@ class xbp
 {
   public:
     xbp () {};
-    xbp (const GF2Mat & X, float sgma);
-    xbp (alist & _list, float sgma);
-    void set_alist_sigma(alist & _list, float sgma);
+    xbp (const GF2Mat X, float sgma);
+    xbp (alist _list, float sgma);
+    void set_alist_sigma(alist _list, float sgma);
     std::vector< std::vector<double> > get_Q();
     std::vector< std::vector<double> > get_R();
     GF2Mat get_H();
@@ -35,7 +35,7 @@ class xbp
     void set_max_iterations(int k);
     int get_max_iterations();
     std::vector<char> decode (std::vector<char> rx_word,
-            int & niterations);
+            int *niterations);
 
   private:
     int M, N, K, max_iterations;

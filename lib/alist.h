@@ -11,9 +11,9 @@ class alist
 {
   public:
     alist() : data_ok(false) {}
-    alist(const std::string &fname);
-    void read(const std::string &fname);
-    void write(const std::string &fname) const;
+    alist(const char * fname);
+    void read(const char * fname);
+    void write(const char * fname) const;
     int get_N();
     int get_M();
     std::vector< std::vector<int> > get_mlist();
