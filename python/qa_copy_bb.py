@@ -54,7 +54,6 @@ class qa_copy_bb (gr_unittest.TestCase):
         self.assertTupleEqual(txdata, rxtpl)
         # check data
 
-"""
     def test_002_t (self):
         # set up fg
         fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"
@@ -82,7 +81,6 @@ class qa_copy_bb (gr_unittest.TestCase):
         rxtpl = dst.data()
         self.assertTupleEqual(txdata, rxtpl)
         # check data
-        """
 
 if __name__ == '__main__':
     gr_unittest.run(qa_copy_bb, "qa_copy_bb.xml")

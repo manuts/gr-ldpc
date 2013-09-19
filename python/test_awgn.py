@@ -33,8 +33,8 @@ class my_tb(gr.top_block):
                 self.decoder, Kvec2str, self.dst)
 
 def main():
-    fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/my_peg2"
-    epsilon = 0.5
+    fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"
+    epsilon = 0.6
     max_iterations = 100
     print "initializing top block"
     tb = my_tb(fname, epsilon, max_iterations)
@@ -47,7 +47,7 @@ def main():
         datatpl.append(0)
     f = open('output', 'w')
     g = open('data', 'w')
-    for i in range(4):
+    for i in range(100):
         txdata = ()
         for i in range(K):
             X = random.randint(0, 1)
@@ -65,16 +65,12 @@ def main():
         tb.dst.reset()
         g.write("rx data\n")
         g.write(str(rx_tpl) + "\n")
-        a = tb.channel.get_err_vec()
-        for i in range(N):
-            print a[i],
         if np.array_equal(txdata, rx_tpl):
             match += 1
         else:
             mismatch += 1
-#        print match, mismatch, tb.channel.nerr
         _str = str(np.array_equal(txdata, rx_tpl))
-        _str = _str + "\t" + str(tb.channel.get_nerr()) + "\t" + str(tb.decoder.get_niterations()) + "\n"
+        _str = _str + "\t" + str(tb.decoder.get_niterations()) + "\n"
         f.write(_str)
 #        print _str
 
