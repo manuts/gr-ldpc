@@ -8,7 +8,9 @@ class my_tb(gr.top_block):
         gr.top_block.__init__(self)
 
         self.src = blocks.vector_source_b(())
+        print "initializing encoder"
         self.encoder = ldpc.ldpc_encoder_bf(fname)
+        print "initializing decoder"
         self.decoder = ldpc.ldpc_decoder_fb(fname, epsilon, max_iterations)
         self.dst = blocks.vector_sink_b()
 

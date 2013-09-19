@@ -54,6 +54,35 @@ class qa_copy_bb (gr_unittest.TestCase):
         self.assertTupleEqual(txdata, rxtpl)
         # check data
 
+"""
+    def test_002_t (self):
+        # set up fg
+        fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"
+        epsilon = 0.5
+        max_iterations = 100
+        encoder = ldpc.ldpc_encoder_bf(fname)
+        decoder = ldpc.ldpc_decoder_fb(fname, epsilon, max_iterations)
+        blk_len = encoder.get_K()
+        datatpl = array.array('B')
+        txdata = ()
+        for i in range(blk_len):
+            X = random.randint(0, 1)
+            if X == 1:
+                datatpl.append(1)
+                txdata = txdata + (1, )
+            else:
+                datatpl.append(0)
+                txdata = txdata + (0, )
+        src = blocks.vector_source_b(datatpl)
+        str2vec = blocks.stream_to_vector(1, blk_len)
+        vec2str = blocks.vector_to_stream(1, blk_len)
+        dst = blocks.vector_sink_b()
+        self.tb.connect(src, str2vec, encoder, decoder, vec2str, dst)
+        self.tb.run ()
+        rxtpl = dst.data()
+        self.assertTupleEqual(txdata, rxtpl)
+        # check data
+        """
 
 if __name__ == '__main__':
     gr_unittest.run(qa_copy_bb, "qa_copy_bb.xml")
