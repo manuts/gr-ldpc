@@ -9,7 +9,7 @@ class my_tb(gr.top_block):
 
         self.src = blocks.vector_source_b(())
         self.encoder = ldpc.ldpc_encoder_bf(fname)
-        self.decoder = ldpc.ldpc_decoder_bb(fname, epsilon, max_iterations)
+        self.decoder = ldpc.ldpc_decoder_fb(fname, epsilon, max_iterations)
         self.dst = blocks.vector_sink_b()
 
         self.K = self.encoder.get_K()

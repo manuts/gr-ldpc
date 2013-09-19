@@ -31,6 +31,7 @@ list(APPEND ldpc_sources
     cldpc.cc
     alist.cc
     xbp.cc
+    awgn_bp.cc
     copy_bb_impl.cc
     ldpc_encoder_bb_impl.cc
     ldpc_decoder_bb_impl.cc
