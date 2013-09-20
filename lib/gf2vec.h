@@ -49,7 +49,7 @@ class GF2Vec
     GF2Vec(int size);
 
     //! Returns the vector
-    std::vector<char> get_vec()i;
+    std::vector<char> get_vec();
 
     //! Returns the size of the vector
     int size();
