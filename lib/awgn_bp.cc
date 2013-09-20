@@ -105,24 +105,17 @@ void awgn_bp::update_chks() {
             v = mlist[chk][i] - 1;
             _prdct = product/double( 2/(1 + Q[chk][v]) - 1);
             R[chk][v] = double((1 - _prdct)/(1 + _prdct));
-//            if ( R[chk][v] != R[chk][v] )
-//                std::cout << chk << "\t" << v << "\t" << R[chk][v] << "\n";
-//            std::cout << _prdct << "\t";
         }
-//        std::cout << "\n";
     }
 }
 
 void awgn_bp::update_vars() {
     double _sum, __sum;
     int c;
-//    std::cout << lr.size() << "\n";
     for ( int var = 0; var < N; var++ ) {
         _sum = rx_lr[var];
         for ( int i = 0; i < num_nlist[var]; i++ ) {
             c = nlist[var][i] - 1;
-//            if ( R[c][var] != R[c][var] ) 
-//                std::cout << "nan ";
             _sum = _sum * double(R[c][var]);
         }
         lr[var] = _sum;
@@ -176,22 +169,13 @@ std::vector<char> awgn_bp::get_syndrome(std::vector<char> codeword) {
 }
 
 std::vector<char> awgn_bp::get_syndrome() {
-//    std::cout << "inside get_syndrome()\n";
     std::vector<char> synd;
-//    std::cout << N - K << " = N - K\n";
-//    std::cout << M << " = M\n";
-//    std::cout << N << " = N\n";
-//    std::cout << K << " = K\n";
     synd.resize(N - K);
     GF2Vec in_bvec;
     in_bvec.set_vec(estimate);
     for ( int i = 0; i < N - K; i++ ) {
         synd[i] = H[i]*in_bvec;
     }
-//    std::cout << "prining syndrome\n";
-//    for (int i = 0; i < N - K; i++ )
-//        std::cout << int(synd[i]);
-//    std::cout << std::endl;
     return synd;
 }
 
@@ -209,10 +193,8 @@ bool awgn_bp::is_codeword(std::vector<char> codeword) {
 }
 
 bool awgn_bp::is_codeword() {
-//    std::cout << "inside is_codeword\n";
     std::vector<char> synd;
     synd = get_syndrome();
-//    std::cout << "inside is_codeword(), computed syndrome\n";
     bool is_code;
     is_code = true;
     for ( int i = 0; i < N - K; i++ ) {
@@ -220,7 +202,6 @@ bool awgn_bp::is_codeword() {
             is_code = false;
         }
     }
-//    std::cout << "returning from is_codeword\n";
     return is_code;
 }
 
@@ -240,7 +221,6 @@ std::vector<char> awgn_bp::decode(std::vector<float> rx_word,
         return estimate;
     }
     else {
-//        std::cout << "branched at not a codeword\n";
         rx_lr_calc(rx_word);
         spa_initialize();
         while (*niteration < max_iterations) {
@@ -252,7 +232,6 @@ std::vector<char> awgn_bp::decode(std::vector<float> rx_word,
                 break;
             }
         }
-//        std::cout << "inside decode function, returing\n";
         return estimate;
     }
 }
