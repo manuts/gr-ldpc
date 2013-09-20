@@ -61,18 +61,13 @@ def main():
         tb.dst.reset()
         g.write("rx data\n")
         g.write(str(rx_tpl) + "\n")
-#        a = tb.channel.get_err_vec()
-#        for i in range(N):
-#            print a[i],
         if np.array_equal(txdata, rx_tpl):
             match += 1
         else:
             mismatch += 1
-#        print match, mismatch, tb.channel.nerr
         _str = str(np.array_equal(txdata, rx_tpl))
         _str = _str + "\t" + str(tb.channel.get_nerr()) + "\t" + str(tb.decoder.get_niterations()) + "\n"
         f.write(_str)
-#        print _str
 
 if __name__ == '__main__':
     try:
