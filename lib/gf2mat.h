@@ -16,13 +16,9 @@ class GF2Mat
     GF2Mat(alist _list);
     GF2Mat(std::vector <std::vector <char> > X);
 
-    int get_M() {
-        return M;
-    }
+    int get_M();
 
-    int get_N() {
-        return N;
-    }
+    int get_N(); 
 
     void set_element(int i, int j, char val);
 

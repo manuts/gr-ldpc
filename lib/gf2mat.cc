@@ -39,6 +39,14 @@ GF2Mat::GF2Mat(alist _list) {
     H = _list.get_matrix();
 }
 
+int GF2Mat::get_M() {
+    return M;
+}
+
+int GF2Mat::get_N() {
+    return N;
+}
+
 void GF2Mat::set_element(int i, int j, char val) {
     H[i][j] = val;
 }
