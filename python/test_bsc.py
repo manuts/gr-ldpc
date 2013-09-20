@@ -30,7 +30,7 @@ class my_tb(gr.top_block):
 
 def main():
     fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"
-    epsilon = 0.03
+    epsilon = 0.06
     max_iterations = 100
     print "initializing top block"
     tb = my_tb(fname, epsilon, max_iterations)
@@ -43,7 +43,7 @@ def main():
         datatpl.append(0)
     f = open('output', 'w')
     g = open('data', 'w')
-    for i in range(4):
+    for i in range(100):
         txdata = ()
         for i in range(K):
             X = random.randint(0, 1)
@@ -61,9 +61,9 @@ def main():
         tb.dst.reset()
         g.write("rx data\n")
         g.write(str(rx_tpl) + "\n")
-        a = tb.channel.get_err_vec()
-        for i in range(N):
-            print a[i],
+#        a = tb.channel.get_err_vec()
+#        for i in range(N):
+#            print a[i],
         if np.array_equal(txdata, rx_tpl):
             match += 1
         else:
