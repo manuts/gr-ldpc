@@ -46,8 +46,6 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(char) * vlen)), d_vlen(vlen)
     {
         limit = 100000*epsilon;
-        char errvec[vlen];
-        err_vec = errvec;
     }
 
     /*
@@ -60,11 +58,6 @@ namespace gr {
     int
     bsc_bb_impl::get_nerr() {
         return nerr;
-    }
-
-    char *
-    bsc_bb_impl::get_err_vec() {
-        return err_vec;
     }
 
     int
@@ -82,11 +75,9 @@ namespace gr {
             X = rand()%100000;
             if ( X > limit ) {
                 out[i] = in[i];
-                err_vec[i] = char(0);
             }
             else {
                 nerr++;
-                err_vec[i] = char(1);
                 if ( in[i] == char(0) ) {
                     out[i] = char(1);
                 }
