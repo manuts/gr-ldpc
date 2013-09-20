@@ -10,7 +10,7 @@
 
 int main () {
     std::string fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/my_peg2";
-    alist a(fname);
+    alist a(fname.c_str());
     srand(time(NULL));
     std::ifstream random("randoms");
     float trans_prob = 0.07;
@@ -52,7 +52,7 @@ int main () {
             else
                 tx[i] = out[i];
         }
-        rx = spa.decode(tx, niterations);
+        rx = spa.decode(tx, &niterations);
         data = code.get_systematic_bits(rx);
         match = true;
         for ( int i = 0; i < K; i++ ) {
