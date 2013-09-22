@@ -31,7 +31,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/ldpc
+    ldpc_hier_encoder_bf.py
+    ldpc_hier_decoder_fb.py DESTINATION ${GR_PYTHON_DIR}/ldpc
 )
 
 ########################################################################

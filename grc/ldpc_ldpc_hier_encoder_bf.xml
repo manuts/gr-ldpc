@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<block>
+  <name>ldpc_hier_encoder_bf</name>
+  <key>ldpc_ldpc_hier_encoder_bf</key>
+  <category>ldpc</category>
+  <import>import ldpc</import>
+  <make>ldpc.ldpc_hier_encoder_bf($alist_file)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>File</name>
+    <key>alist_file</key>
+    <type>file_open</type>
+  </param>
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>float</type>
+  </source>
+</block>

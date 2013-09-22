@@ -45,6 +45,9 @@ if _RTLD_GLOBAL != 0:
 from ldpc_swig import *
 
 # import any pure python here
+from ldpc_hier_encoder_bf import ldpc_hier_encoder_bf
+from ldpc_hier_decoder_fb import ldpc_hier_decoder_fb
+
 #
 
 # ----------------------------------------------------------------

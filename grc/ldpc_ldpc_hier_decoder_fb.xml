@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<block>
+  <name>ldpc_hier_decoder_fb</name>
+  <key>ldpc_ldpc_hier_decoder_fb</key>
+  <category>ldpc</category>
+  <import>import ldpc</import>
+  <make>ldpc.ldpc_hier_decoder_fb($alist_file, $sigma, $max_iterations)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>Alist File</name>
+    <key>alist_file</key>
+    <type>file_open</type>
+  </param>
+  <param>
+    <name>Sigma</name>
+    <key>sigma</key>
+    <type>float</type>
+  </param>
+  <param>
+    <name>Max iterations</name>
+    <key>max_iterations</key>
+    <type>int</type>
+  </param>
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

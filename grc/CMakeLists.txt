@@ -16,12 +16,13 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     ldpc_copy_bb.xml
     ldpc_ldpc_encoder_bb.xml
     ldpc_ldpc_decoder_bb.xml
     ldpc_bsc_bb.xml
     ldpc_ldpc_encoder_bf.xml
-    ldpc_ldpc_decoder_fb.xml DESTINATION share/gnuradio/grc/blocks
+    ldpc_ldpc_decoder_fb.xml
+    ldpc_ldpc_hier_encoder_bf.xml
+    ldpc_ldpc_hier_decoder_fb.xml DESTINATION share/gnuradio/grc/blocks
 )
