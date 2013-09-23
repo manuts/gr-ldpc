@@ -9,12 +9,15 @@ class my_tb(gr.top_block):
         decoder = ldpc.ldpc_hier_decoder_fb(fname,
                 sigma, max_iterations)
 
+        unpack2pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
+        pack2unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
+
         inFile = "/home/manu/Downloads/in.flac"
         outFile = "/home/manu/Downloads/out.flac"
         source = blocks.file_source(1, inFile, False)
         sink = blocks.file_sink(1, outFile)
 
-        self.connect(source, encoder, decoder, sink)
+        self.connect(source, pack2unpack, encoder, decoder, unpack2pack, sink)
 
 def main():
     fname = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"

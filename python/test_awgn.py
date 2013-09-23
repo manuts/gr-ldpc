@@ -8,11 +8,21 @@ class my_tb(gr.top_block):
         gr.top_block.__init__(self)
 
         self.src = blocks.vector_source_b(())
-        print "initializing encoder"
         self.encoder = ldpc.ldpc_encoder_bf(fname)
-        print "initializing decoder"
         self.decoder = ldpc.ldpc_decoder_fb(fname, epsilon, max_iterations)
         self.dst = blocks.vector_sink_b()
+        fsink1 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/in")
+        fsink1.set_unbuffered(False)
+        fsink2 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out")
+        fsink2.set_unbuffered(False)
+
+        inFile = "/home/manu/Downloads/in.flac"
+        outFile = "/home/manu/Downloads/out.flac"
+        source = blocks.file_source(1, inFile, False)
+        sink = blocks.file_sink(1, outFile)
+        unpack2pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
+        pack2unpack = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
+        rsource= blocks.vector_source_b(map(int, np.random.randint(0x00, 0x02, 1000)), True)
 
         self.K = self.encoder.get_K()
         self.N = self.encoder.get_N()
@@ -24,6 +34,10 @@ class my_tb(gr.top_block):
 
         self.noise = analog.noise_source_f(analog.GR_GAUSSIAN, epsilon, 0)
         self.adder = blocks.add_vff(1)
+
+#        self.connect(rsource, fsink1)
+#        self.connect(rsource, str2Kvec, self.encoder, self.decoder,
+#                Kvec2str, fsink2)
 
         self.connect(self.src, str2Kvec, self.encoder,
                 Nvec2str)
@@ -38,6 +52,8 @@ def main():
     max_iterations = 100
     print "initializing top block"
     tb = my_tb(fname, epsilon, max_iterations)
+#    tb.start()
+#    tb.wait()
     K = tb.K
     N = tb.N
     match = 0
