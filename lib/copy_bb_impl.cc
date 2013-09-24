@@ -68,9 +68,10 @@ namespace gr {
         char *out = (char *) output_items[0];
 
         // Do <+signal processing+>
-        for ( int i = 0; i < d_vlen; i++ ) {
-            out[i] = in[i];
-        }
+//        for ( int i = 0; i < d_vlen; i++ ) {
+//            out[i] = in[i];
+//        }
+        memcpy(out, in, d_vlen);
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

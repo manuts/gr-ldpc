@@ -24,6 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include "ldpc_encoder_bb_impl.h"
+#include <iostream>
 
 namespace gr {
   namespace ldpc {
@@ -84,8 +85,14 @@ namespace gr {
         }
         code = d_code.encode(data);
         for ( int i = 0; i < N; i++ ) {
+            std::cout << int(code[i]);
             out[i] = code[i];
         }
+        std::cout << std::endl;
+        for ( int i = 0; i < N; i++ ) {
+            std::cout << int(out[i]);
+        }
+        std::cout << std::endl;
 
         // Tell runtime system how many output items we produced.
         return noutput_items;
