@@ -30,7 +30,7 @@ class my_tb(gr.top_block):
         fsink3.set_unbuffered(False)
 
         inFile = "/home/manu/Downloads/in.flac"
-        outFile = "/home/manu/Downloads/out.flac"
+        outFile = "/home/manu/out.flac"
         source = blocks.file_source(gr.sizeof_char*self.K, inFile, False)
         sink = blocks.file_sink(gr.sizeof_char*self.K, outFile)
         unpack2pack = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)

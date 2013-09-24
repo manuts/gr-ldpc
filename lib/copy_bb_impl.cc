@@ -24,6 +24,7 @@
 
 #include <gnuradio/io_signature.h>
 #include "copy_bb_impl.h"
+#include <iostream>
 
 namespace gr {
   namespace ldpc {
@@ -67,11 +68,7 @@ namespace gr {
         const char *in = (const char *) input_items[0];
         char *out = (char *) output_items[0];
 
-        // Do <+signal processing+>
-//        for ( int i = 0; i < d_vlen; i++ ) {
-//            out[i] = in[i];
-//        }
-        memcpy(out, in, d_vlen);
+        memcpy(out, in, noutput_items * d_vlen);
 
         // Tell runtime system how many output items we produced.
         return noutput_items;

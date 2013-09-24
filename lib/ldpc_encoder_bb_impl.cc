@@ -80,19 +80,15 @@ namespace gr {
         // Do <+signal processing+>
         std::vector<char> data, code;
         data.resize(K);
+
         for ( int i = 0; i < K; i++ ) {
             data[i] = in[i];
         }
+
         code = d_code.encode(data);
         for ( int i = 0; i < N; i++ ) {
-            std::cout << int(code[i]);
             out[i] = code[i];
         }
-        std::cout << std::endl;
-        for ( int i = 0; i < N; i++ ) {
-            std::cout << int(out[i]);
-        }
-        std::cout << std::endl;
 
         // Tell runtime system how many output items we produced.
         return noutput_items;
