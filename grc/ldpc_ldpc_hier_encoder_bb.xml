@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>ldpc_hier_encoder_bf</name>
-  <key>ldpc_ldpc_hier_encoder_bf</key>
+  <name>ldpc_hier_encoder_bb</name>
+  <key>ldpc_ldpc_hier_encoder_bb</key>
   <category>ldpc</category>
   <import>import ldpc</import>
-  <make>ldpc.ldpc_hier_encoder_bf($alist_file)</make>
+  <make>ldpc.ldpc_hier_encoder_bb($alist_file)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name

@@ -3,10 +3,11 @@
 # Gnuradio Python Flow Graph
 # Title: Example1
 # Author: Manu T S
-# Generated: Mon Sep 23 15:08:29 2013
+# Generated: Wed Sep 25 11:14:24 2013
 ##################################################
 
 from gnuradio import blocks
+from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
 from gnuradio.eng_option import eng_option
@@ -14,7 +15,6 @@ from gnuradio.filter import firdes
 from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import ldpc
-import numpy
 import wx
 
 class example1(grc_wxgui.top_block_gui):
@@ -35,21 +35,24 @@ class example1(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        self.ldpc_ldpc_hier_encoder_bf_0 = ldpc.ldpc_hier_encoder_bf(alist_file)
+        self.ldpc_ldpc_hier_encoder_bf_1 = ldpc.ldpc_hier_encoder_bf(alist_file)
         self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb(alist_file, sigma, max_iterations)
-        self.blocks_file_sink_0_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/in")
-        self.blocks_file_sink_0_0.set_unbuffered(False)
+        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bf(([1.0, -1.0]), 2)
+        self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
+        self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/in.flac", False)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out")
         self.blocks_file_sink_0.set_unbuffered(False)
-        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0x00, 0x02, 1000)), True)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.ldpc_ldpc_hier_encoder_bf_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
-        self.connect((self.analog_random_source_x_0, 0), (self.ldpc_ldpc_hier_encoder_bf_0, 0))
-        self.connect((self.ldpc_ldpc_hier_decoder_fb_0, 0), (self.blocks_file_sink_0, 0))
-        self.connect((self.analog_random_source_x_0, 0), (self.blocks_file_sink_0_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_packed_to_unpacked_xx_0, 0))
+        self.connect((self.ldpc_ldpc_hier_decoder_fb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))
+        self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
+        self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.ldpc_ldpc_hier_encoder_bf_1, 0))
+        self.connect((self.ldpc_ldpc_hier_encoder_bf_1, 0), (self.digital_chunks_to_symbols_xx_0, 0))
 
 
 # QT sink close method reimplementation

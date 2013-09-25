@@ -24,7 +24,7 @@ import ldpc
 
 class ldpc_hier_encoder_bb(gr.hier_block2):
     """
-    docstring for block ldpc_hier_encoder_bf
+    docstring for block ldpc_hier_encoder_bb
     """
     def __init__(self, alist_file):
         gr.hier_block2.__init__(self,
