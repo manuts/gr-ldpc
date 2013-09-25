@@ -23,6 +23,6 @@ install(FILES
     ldpc_bsc_bb.xml
     ldpc_ldpc_encoder_bf.xml
     ldpc_ldpc_decoder_fb.xml
-    ldpc_ldpc_hier_encoder_bf.xml
+    ldpc_ldpc_hier_encoder_bb.xml
     ldpc_ldpc_hier_decoder_fb.xml DESTINATION share/gnuradio/grc/blocks
 )
