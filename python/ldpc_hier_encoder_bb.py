@@ -22,21 +22,21 @@
 from gnuradio import gr, blocks
 import ldpc
 
-class ldpc_hier_encoder_bf(gr.hier_block2):
+class ldpc_hier_encoder_bb(gr.hier_block2):
     """
     docstring for block ldpc_hier_encoder_bf
     """
     def __init__(self, alist_file):
         gr.hier_block2.__init__(self,
-            "ldpc_hier_encoder_bf",
+            "ldpc_hier_encoder_bb",
             gr.io_signature(1, 1, gr.sizeof_char),  # Input signature
-            gr.io_signature(1, 1, gr.sizeof_float)) # Output signature
+            gr.io_signature(1, 1, gr.sizeof_char)) # Output signature
 
         # Define blocks and connect them
-        encoder = ldpc.ldpc_encoder_bf(alist_file)
+        encoder = ldpc.ldpc_encoder_bb(alist_file)
         K = encoder.get_K()
         N = encoder.get_N()
         str2Kvec = blocks.stream_to_vector(1, K)
-        Nvec2str = blocks.vector_to_stream(4, N)
+        Nvec2str = blocks.vector_to_stream(1, N)
 
         self.connect(self, str2Kvec, encoder, Nvec2str, self)

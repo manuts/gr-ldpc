@@ -33,6 +33,6 @@
        * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
-    <type>float</type>
+    <type>byte</type>
   </source>
 </block>
