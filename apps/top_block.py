@@ -2,20 +2,18 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Sep 23 15:12:11 2013
+# Generated: Wed Sep 25 11:30:44 2013
 ##################################################
 
 from gnuradio import blocks
+from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
-from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from gnuradio.wxgui import scopesink2
 from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import ldpc
-import numpy
 import wx
 
 class top_block(grc_wxgui.top_block_gui):
@@ -28,44 +26,53 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Variables
         ##################################################
+        self.sigma = sigma = 0.3
         self.samp_rate = samp_rate = 32000
-        self.alist_file = alist_file = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files"
+        self.max_iterations = max_iterations = 50
+        self.alist_file = alist_file = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963"
 
         ##################################################
         # Blocks
         ##################################################
-        self.wxgui_scopesink2_0 = scopesink2.scope_sink_f(
-        	self.GetWin(),
-        	title="Scope Plot",
-        	sample_rate=samp_rate,
-        	v_scale=0,
-        	v_offset=0,
-        	t_scale=0,
-        	ac_couple=False,
-        	xy_mode=False,
-        	num_inputs=1,
-        	trig_mode=wxgui.TRIG_MODE_AUTO,
-        	y_axis_label="Counts",
-        )
-        self.Add(self.wxgui_scopesink2_0.win)
-        self.ldpc_ldpc_hier_encoder_bf_0 = ldpc.ldpc_hier_encoder_bf(alist_file)
-        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0x00, 0x02, 1000)), True)
+        self.ldpc_ldpc_hier_encoder_bb_0 = ldpc.ldpc_hier_encoder_bb("/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963")
+        self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb("/home/manu/repos/ldpc/gr-ldpc/python/alist-files/96.3.963", sigma, max_iterations)
+        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bf(([1.0, -1.0]), 1)
+        self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
+        self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/in.flac", False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/out")
+        self.blocks_file_sink_0.set_unbuffered(False)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_random_source_x_0, 0), (self.ldpc_ldpc_hier_encoder_bf_0, 0))
-        self.connect((self.ldpc_ldpc_hier_encoder_bf_0, 0), (self.wxgui_scopesink2_0, 0))
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_packed_to_unpacked_xx_0, 0))
+        self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.ldpc_ldpc_hier_encoder_bb_0, 0))
+        self.connect((self.ldpc_ldpc_hier_encoder_bb_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
+        self.connect((self.ldpc_ldpc_hier_decoder_fb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))
+        self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_file_sink_0, 0))
 
 
 # QT sink close method reimplementation
+
+    def get_sigma(self):
+        return self.sigma
+
+    def set_sigma(self, sigma):
+        self.sigma = sigma
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.wxgui_scopesink2_0.set_sample_rate(self.samp_rate)
+
+    def get_max_iterations(self):
+        return self.max_iterations
+
+    def set_max_iterations(self, max_iterations):
+        self.max_iterations = max_iterations
 
     def get_alist_file(self):
         return self.alist_file

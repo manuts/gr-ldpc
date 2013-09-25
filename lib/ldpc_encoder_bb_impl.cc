@@ -81,15 +81,17 @@ namespace gr {
         std::vector<char> data, code;
         data.resize(K);
 
-        for ( int i = 0; i < K; i++ ) {
-            data[i] = in[i];
-        }
+        for (int j = 0; j < noutput_items; j++) {
 
-        code = d_code.encode(data);
-        for ( int i = 0; i < N; i++ ) {
-            out[i] = code[i];
-        }
+            for ( int i = 0; i < K; i++ ) {
+                data[i] = in[i + (j*K)];
+            }
 
+            code = d_code.encode(data);
+            for ( int i = 0; i < N; i++ ) {
+                out[i + (j*N)] = code[i];
+            }
+        }
         // Tell runtime system how many output items we produced.
         return noutput_items;
     }

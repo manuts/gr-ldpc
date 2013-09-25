@@ -88,13 +88,15 @@ namespace gr {
         std::vector<char> rx;
         std::vector<char> estimate, data;
         rx.resize(N);
-        for ( int i = 0; i < N; i++ ) {
-            rx[i] = in[i];
-        }
-        estimate = d_spa.decode(rx, &n_iterations);
-        data = d_code.get_systematic_bits(estimate);
-        for ( int i = 0; i < K; i++ ) {
-            out[i] = data[i];
+        for (int j = 0; j < noutput_items; j++) {
+            for ( int i = 0; i < N; i++ ) {
+                rx[i] = in[i + (j*N)];
+            }
+            estimate = d_spa.decode(rx, &n_iterations);
+            data = d_code.get_systematic_bits(estimate);
+            for ( int i = 0; i < K; i++ ) {
+                out[i + (j*K)] = data[i];
+            }
         }
 
         // Tell runtime system how many output items we produced.

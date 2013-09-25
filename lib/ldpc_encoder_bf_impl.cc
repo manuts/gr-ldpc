@@ -79,16 +79,18 @@ namespace gr {
         // Do <+signal processing+>
         std::vector<char> data, code;
         data.resize(K);
-        for ( int i = 0; i < K; i++ ) {
-            data[i] = in[i];
-        }
-        code = d_code.encode(data);
-        for ( int i = 0; i < N; i++ ) {
-            if ( code[i] == char(0) ) {
-                out[i] = 1.0;
+        for (int j = 0; j < noutput_items; j++) {
+            for ( int i = 0; i < K; i++ ) {
+                data[i] = in[i + (j*K)];
             }
-            else {
-                out[i] = -1.0;
+            code = d_code.encode(data);
+            for ( int i = 0; i < N; i++ ) {
+                if ( code[i] == char(0) ) {
+                    out[i + (j*N)] = 1.0;
+                }
+                else {
+                    out[i + (j*N)] = -1.0;
+                }
             }
         }
 
