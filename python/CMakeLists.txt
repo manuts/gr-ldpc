@@ -32,7 +32,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     ldpc_hier_encoder_bb.py
-    ldpc_hier_decoder_fb.py DESTINATION ${GR_PYTHON_DIR}/ldpc
+    ldpc_hier_decoder_fb.py
+    DESTINATION ${GR_PYTHON_DIR}/ldpc
 )
 
 ########################################################################

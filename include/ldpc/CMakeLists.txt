@@ -27,5 +27,6 @@ install(FILES
     ldpc_decoder_bb.h
     bsc_bb.h
     ldpc_encoder_bf.h
-    ldpc_decoder_fb.h DESTINATION include/ldpc
+    ldpc_decoder_fb.h
+    lh_detector_fb.h DESTINATION include/ldpc
 )
