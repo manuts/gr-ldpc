@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: Example1
 # Author: Manu T S
-# Generated: Wed Sep 25 11:14:24 2013
+# Generated: Wed Apr  9 01:20:59 2014
 ##################################################
 
 from gnuradio import blocks
@@ -35,13 +35,13 @@ class example1(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        self.ldpc_ldpc_hier_encoder_bf_1 = ldpc.ldpc_hier_encoder_bf(alist_file)
-        self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb(alist_file, sigma, max_iterations)
+        self.ldpc_ldpc_hier_encoder_bb_0 = ldpc.ldpc_hier_encoder_bb("/home/manu/8000.4000.3.483/H8000.4000.3.483")
+        self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb("/home/manu/8000.4000.3.483/H8000.4000.3.483", sigma, max_iterations)
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bf(([1.0, -1.0]), 2)
         self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
         self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/in.flac", False)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out")
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/06 - Coming Back To Life.flac", False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out", False)
         self.blocks_file_sink_0.set_unbuffered(False)
 
         ##################################################
@@ -51,8 +51,8 @@ class example1(grc_wxgui.top_block_gui):
         self.connect((self.ldpc_ldpc_hier_decoder_fb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))
         self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
-        self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.ldpc_ldpc_hier_encoder_bf_1, 0))
-        self.connect((self.ldpc_ldpc_hier_encoder_bf_1, 0), (self.digital_chunks_to_symbols_xx_0, 0))
+        self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.ldpc_ldpc_hier_encoder_bb_0, 0))
+        self.connect((self.ldpc_ldpc_hier_encoder_bb_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
 
 
 # QT sink close method reimplementation
@@ -82,6 +82,14 @@ class example1(grc_wxgui.top_block_gui):
         self.alist_file = alist_file
 
 if __name__ == '__main__':
+    import ctypes
+    import sys
+    if sys.platform.startswith('linux'):
+        try:
+            x11 = ctypes.cdll.LoadLibrary('libX11.so')
+            x11.XInitThreads()
+        except:
+            print "Warning: failed to XInitThreads()"
     parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
     (options, args) = parser.parse_args()
     tb = example1()

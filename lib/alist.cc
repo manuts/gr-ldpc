@@ -123,7 +123,7 @@ void alist::read(const char * fname) {
     }
 
     // Parse indices with non zero entries in ith row
-    for (int row = 0; row < N; row++) {
+    for (int row = 0; row < M; row++) {
         std::getline(file, line);
         ss << line;
         for (int entry = 0; entry < num_mlist[row]; entry++) {
