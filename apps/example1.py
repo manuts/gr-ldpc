@@ -3,9 +3,10 @@
 # Gnuradio Python Flow Graph
 # Title: Example1
 # Author: Manu T S
-# Generated: Wed Apr  9 01:27:21 2014
+# Generated: Wed Apr  9 01:36:34 2014
 ##################################################
 
+from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -27,7 +28,7 @@ class example1(grc_wxgui.top_block_gui):
         ##################################################
         # Variables
         ##################################################
-        self.sigma = sigma = 0.3
+        self.sigma = sigma = 0.5
         self.samp_rate = samp_rate = 32000
         self.max_iterations = max_iterations = 50
         self.alist_file = alist_file = "/home/manu/repos/ldpc/gr-ldpc/python/alist-files"
@@ -43,6 +44,8 @@ class example1(grc_wxgui.top_block_gui):
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/06 - Coming Back To Life.flac", False)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out", False)
         self.blocks_file_sink_0.set_unbuffered(False)
+        self.blocks_add_xx_0 = blocks.add_vff(1)
+        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, sigma, 0)
 
         ##################################################
         # Connections
@@ -50,9 +53,11 @@ class example1(grc_wxgui.top_block_gui):
         self.connect((self.blocks_file_source_0, 0), (self.blocks_packed_to_unpacked_xx_0, 0))
         self.connect((self.ldpc_ldpc_hier_decoder_fb_0, 0), (self.blocks_unpacked_to_packed_xx_0, 0))
         self.connect((self.blocks_unpacked_to_packed_xx_0, 0), (self.blocks_file_sink_0, 0))
-        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
         self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.ldpc_ldpc_hier_encoder_bb_0, 0))
         self.connect((self.ldpc_ldpc_hier_encoder_bb_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
+        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.blocks_add_xx_0, 0))
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 1))
+        self.connect((self.blocks_add_xx_0, 0), (self.ldpc_ldpc_hier_decoder_fb_0, 0))
 
 
 # QT sink close method reimplementation
@@ -62,6 +67,7 @@ class example1(grc_wxgui.top_block_gui):
 
     def set_sigma(self, sigma):
         self.sigma = sigma
+        self.analog_noise_source_x_0.set_amplitude(self.sigma)
 
     def get_samp_rate(self):
         return self.samp_rate
