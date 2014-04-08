@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: Example1
 # Author: Manu T S
-# Generated: Wed Apr  9 01:20:59 2014
+# Generated: Wed Apr  9 01:27:21 2014
 ##################################################
 
 from gnuradio import blocks
@@ -35,11 +35,11 @@ class example1(grc_wxgui.top_block_gui):
         ##################################################
         # Blocks
         ##################################################
-        self.ldpc_ldpc_hier_encoder_bb_0 = ldpc.ldpc_hier_encoder_bb("/home/manu/8000.4000.3.483/H8000.4000.3.483")
-        self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb("/home/manu/8000.4000.3.483/H8000.4000.3.483", sigma, max_iterations)
-        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bf(([1.0, -1.0]), 2)
-        self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_MSB_FIRST)
-        self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
+        self.ldpc_ldpc_hier_encoder_bb_0 = ldpc.ldpc_hier_encoder_bb("/home/manu/1920.1280.3.303/H1920.1280.3.303")
+        self.ldpc_ldpc_hier_decoder_fb_0 = ldpc.ldpc_hier_decoder_fb("/home/manu/1920.1280.3.303/H1920.1280.3.303", sigma, max_iterations)
+        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bf(([1.0, -1.0]), 1)
+        self.blocks_unpacked_to_packed_xx_0 = blocks.unpacked_to_packed_bb(1, gr.GR_LSB_FIRST)
+        self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_LSB_FIRST)
         self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, "/home/manu/Downloads/06 - Coming Back To Life.flac", False)
         self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/manu/Downloads/out", False)
         self.blocks_file_sink_0.set_unbuffered(False)
